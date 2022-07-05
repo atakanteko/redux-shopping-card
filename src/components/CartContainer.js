@@ -1,7 +1,14 @@
 import React from "react";
+// component
 import CartItem from "./CartItem";
-const CartContainer = ({ cart = [] }) => {
-  if (cart.length === 0) {
+// redux stuff
+import {useSelector} from "react-redux";
+
+const CartContainer = () => {
+
+  const {cardItems} = useSelector(state => state.shoppingCartReducer)
+
+  if (cardItems.length === 0) {
     return (
       <section className="cart">
         {/* cart header */}
@@ -20,7 +27,7 @@ const CartContainer = ({ cart = [] }) => {
       </header>
       {/* cart items */}
       <article>
-        {cart.map(item => {
+        {cardItems.map(item => {
           return <CartItem key={item.id} {...item} />;
         })}
       </article>

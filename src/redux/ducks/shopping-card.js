@@ -6,9 +6,9 @@ const LOAD   = 'my-app/widgets/LOAD';
 
 // State
 const initialState = {
-    card: staticData,
+    cardItems: staticData,
     total: 0,
-    amount: 0,
+    amount: 9,
 }
 // Reducer
 export default function reducer(state= initialState, action = {}) {
