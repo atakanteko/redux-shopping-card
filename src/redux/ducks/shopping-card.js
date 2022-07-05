@@ -1,7 +1,7 @@
 import staticData from '../../cart-items'
 
 // Actions
-const LOAD   = 'my-app/widgets/LOAD';
+const CLEAR_CARD = 'shopping-cart-app/shopping-cart/CLEAR_CARD';
 
 
 // State
@@ -13,12 +13,13 @@ const initialState = {
 // Reducer
 export default function reducer(state= initialState, action = {}) {
     switch (action.type) {
-        // do reducer stuff
+        case CLEAR_CARD:
+            return {...state, cardItems: []}
         default: return state;
     }
 }
 
 // Action Creators
-export function loadWidgets() {
-    return { type: LOAD };
+export function clearCard() {
+    return { type: CLEAR_CARD };
 }

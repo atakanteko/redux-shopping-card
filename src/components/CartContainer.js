@@ -3,10 +3,18 @@ import React from "react";
 import CartItem from "./CartItem";
 // redux stuff
 import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+// redux action
+import {clearCard} from "../redux/ducks/shopping-card";
 
 const CartContainer = () => {
 
   const {cardItems} = useSelector(state => state.shoppingCartReducer)
+  const dispatch = useDispatch()
+
+  const handleClear = () => {
+      dispatch(clearCard())
+  }
 
   if (cardItems.length === 0) {
     return (
@@ -39,7 +47,7 @@ const CartContainer = () => {
             total <span>$0.00</span>
           </h4>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button onClick={handleClear} className="btn clear-btn">clear cart</button>
       </footer>
     </section>
   );
