@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 // redux action
 import {removeItem} from "../redux/ducks/shopping-card";
 import {increaseItem} from "../redux/ducks/shopping-card";
+import {decreaseItem} from "../redux/ducks/shopping-card";
 
 const CartItem = ({ id, img, title, price, amount }) => {
     const dispatch = useDispatch()
@@ -11,8 +12,13 @@ const CartItem = ({ id, img, title, price, amount }) => {
     const handleRemoveItem = (id) => {
         dispatch(removeItem(id))
     }
+
     const handleIncreaseItem = (id) => {
         dispatch(increaseItem(id))
+    }
+
+    const handleDecreaseItem = (id) => {
+        dispatch(decreaseItem(id))
     }
     return (
     <div className="cart-item">
@@ -33,7 +39,7 @@ const CartItem = ({ id, img, title, price, amount }) => {
         {/* amount */}
         <p className="amount">{amount}</p>
         {/* decrease amount */}
-        <button className="amount-btn">
+        <button className="amount-btn" onClick={()=> handleDecreaseItem({id, img, title, price, amount})}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
