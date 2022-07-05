@@ -1,14 +1,23 @@
 import React from "react";
+// redux stuff
+import {useDispatch} from "react-redux";
+// redux action
+import {removeItem} from "../redux/ducks/shopping-card";
 
-const CartItem = ({ img, title, price, amount }) => {
-  return (
+const CartItem = ({ id, img, title, price, amount }) => {
+    const dispatch = useDispatch()
+
+    const handleRemoveItem = (id) => {
+        dispatch(removeItem(id))
+    }
+    return (
     <div className="cart-item">
       <img src={img} alt={title} />
       <div>
         <h4>{title}</h4>
         <h4 className="item-price">${price}</h4>
         {/* remove button */}
-        <button className="remove-btn">remove</button>
+        <button className="remove-btn" onClick={()=> handleRemoveItem(id)}>remove</button>
       </div>
       <div>
         {/* increase amount */}
