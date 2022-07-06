@@ -3,7 +3,7 @@ import shoppingCartReducer from "./ducks/shopping-card";
 
 const store = configureStore({
     reducer: {
-        shoppingCartReducer
+        shoppingCard:shoppingCartReducer
     }
 })
 

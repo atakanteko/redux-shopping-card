@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useEffect} from "react";
 // component
 import CartItem from "./CartItem";
 // redux stuff
 import {useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 // redux action
-import {clearCard} from "../redux/ducks/shopping-card";
+import shoppingCartReducer, {clearCard} from "../redux/ducks/shopping-card";
+import {getTotals} from "../redux/ducks/shopping-card";
 
 const CartContainer = () => {
 
-  const {cardItems} = useSelector(state => state.shoppingCartReducer)
+  const {cardItems, total} = useSelector(state => state.shoppingCard)
   const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getTotals())
+    }, [cardItems])
 
   const handleClear = () => {
       dispatch(clearCard())
@@ -44,7 +49,7 @@ const CartContainer = () => {
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>$0.00</span>
+            total <span>{total}</span>
           </h4>
         </div>
         <button onClick={handleClear} className="btn clear-btn">clear cart</button>

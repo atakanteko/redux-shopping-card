@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 
 const Navbar = () => {
 
-  const {amount} = useSelector(state => state.shoppingCartReducer)
+  const {amount} = useSelector(state => state.shoppingCard)
 
   return (
     <nav>

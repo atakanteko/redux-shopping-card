@@ -5,12 +5,13 @@ const CLEAR_CARD = 'shopping-cart-app/shopping-cart/CLEAR_CARD';
 const REMOVE_ITEM = 'shopping-cart-app/shopping-cart/REMOVE_ITEM';
 const INCREASE_ITEM = 'shopping-cart-app/shopping-cart/INCREASE_ITEM';
 const DECREASE_ITEM = 'shopping-cart-app/shopping-cart/DECREASE_ITEM';
+const GET_TOTALS = 'shopping-cart-app/shopping-cart/GET_TOTALS';
 
 // State
 const initialState = {
     cardItems: staticData,
     total: 0,
-    amount: 9,
+    amount: 0,
 }
 
 // Reducer
@@ -41,6 +42,22 @@ export default function reducer(state = initialState, action = {}) {
                 })
             }
             return {...state, cardItems: tempCardDec}
+        case GET_TOTALS:
+            let {total, amount} = state.cardItems.reduce(
+                (prevValue, currentValue) => {
+                const { price, amount} = currentValue;
+                const itemTotal = price * amount;
+                console.log(prevValue)
+                prevValue.total += itemTotal
+                prevValue.amount += amount
+                return prevValue
+            },
+            {
+                total : 0,
+                amount : 0
+            })
+            total = parseFloat(total.toFixed(2))
+            return {...state, amount, total}
         default: return state;
     }
 }
@@ -60,4 +77,8 @@ export function increaseItem(id) {
 
 export function decreaseItem(data) {
     return { type: DECREASE_ITEM, payload: data };
+}
+
+export function getTotals() {
+    return { type: GET_TOTALS };
 }
